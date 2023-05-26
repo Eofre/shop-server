@@ -31,7 +31,7 @@ export class ShoppingCartService {
         return cart.save();
     }
 
-    async updateCount(count: number, productId: number): Promise<{count: number}> {
+    async updateCount(count: number, productId: string): Promise<{count: number}> {
         await this.shoppingCartModel.update({ count }, { where: { productId }})
         const cart = await this.shoppingCartModel.findOne({where: { productId }})
 
