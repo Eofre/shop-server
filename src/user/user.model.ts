@@ -1,8 +1,12 @@
-import { Column, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table, Unique } from "sequelize-typescript";
+import { ShoppingCart } from "../shopping-cart/shopping-cart.model";
 
-@Table
+@Table({
+    tableName: "user"
+  })
 export class User extends Model {
 
+    @Unique
     @Column
     username: string
 
@@ -12,13 +16,18 @@ export class User extends Model {
     @Column
     fullName: string
 
+    @Unique
     @Column
     email: string
 
-    @Column
-    numberPhone: string
+    @Unique
+    @Column({ type: DataType.STRING(11) })
+    numberPhone: string;
 
     @Column
     address: string
+
+    // @HasMany(() => ShoppingCart)
+    // shoppingCarts: ShoppingCart[];
 
 }
