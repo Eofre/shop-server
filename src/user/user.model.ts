@@ -27,7 +27,4 @@ export class User extends Model {
     @Column
     address: string
 
-    // @HasMany(() => ShoppingCart)
-    // shoppingCarts: ShoppingCart[];
-
 }
