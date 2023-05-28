@@ -1,6 +1,5 @@
 import { BelongsTo, Column, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { ProductCategory } from "src/product-сategory/product-сategory.model";
-import { ShoppingCart } from "src/shopping-cart/shopping-cart.model";
 
 @Table({
     tableName: "product"
@@ -28,7 +27,4 @@ export class Product extends Model {
 
     @BelongsTo(() => ProductCategory) 
     productCategory: ProductCategory;
-
-    // @HasMany(() => ShoppingCart)
-    // shoppingCarts: ShoppingCart[];
 }
