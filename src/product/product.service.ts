@@ -27,6 +27,25 @@ export class ProductService {
     return productsDTO;
   }
 
+  async getProductById(id: string): Promise<ResponceProductDto> {
+    const product = await this.productModel.findOne({
+      where: { id: id },
+      include: [ProductCategory],
+    });
+
+    const productDTO: ResponceProductDto = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      image: product.image,
+      quantityInStock: product.quantityInStock,
+      productCategory: product.productCategory,
+    }
+
+    return productDTO;
+  }
+
   findOne(filter:{ where: { id: string } }): Promise<Product> {
     return this.productModel.findOne({...filter})
   }
