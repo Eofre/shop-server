@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ShoppingCartService } from './shopping-cart.service';
 import { AuthenticatedGuard } from 'src/auth/authenticated.guard';
 import { AddToCartDto } from './dto/add-to-cart.dto';
@@ -24,5 +24,17 @@ export class ShoppingCartController {
     updateCount(@Body() { count }: { count: number},
     @Param('id') productId: string) {
         return this.shoppingCartService.updateCount(count, productId);
+    }
+
+    @UseGuards(AuthenticatedGuard)
+    @Get('/item/:userId/:productId')
+    findCartItem(@Param('userId') userId: string, @Param('productId') productId: string) {
+      return this.shoppingCartService.findCartItemByProductId(userId, productId);
+    }
+
+    @UseGuards(AuthenticatedGuard)
+    @Delete('/remove/:userId/:productId')
+    async remove(@Param('userId') userId: string, @Param('productId') productId: string): Promise<void> {
+        await this.shoppingCartService.remove(userId, productId);
     }
 }
